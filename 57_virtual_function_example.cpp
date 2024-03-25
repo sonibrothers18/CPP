@@ -1,0 +1,73 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+class CWH{
+    protected:
+        string title;
+        float rating;
+    public:
+        CWH(string s, float r){
+            title = s;
+            rating = r;
+        }
+        // void display(){
+        virtual void display(){
+            cout<<"Virtual keyword is absent"<<endl;
+        }
+};
+
+class CWHVideo : public CWH{
+    float videoLength;
+    public:
+        CWHVideo(string s, float r, float vl) : CWH(s, r){
+            videoLength = vl;
+        }
+        void display(){
+            cout<<"This is an amazing video with title "<<title<<endl;
+            cout<<"Ratings: "<<rating<<" out of 5 stars"<<endl;
+            cout<<"Length of this video is: "<<videoLength<<" minutes"<<endl;
+        }
+};
+
+class CWHText : public CWH{
+    int words;
+    public:
+        CWHText(string s, float r, int wc) : CWH(s, r){
+            words = wc;
+        }
+        void display(){
+            cout<<"This is an amzing text tutorial with title "<<title<<endl;
+            cout<<"Rating of this text tutorial: "<<rating<<" out of 5 stars"<<endl;
+            cout<<"No of words in this text tutorial is: "<<words<<" words"<<endl;
+        } 
+};
+
+int main(){
+
+    string title;
+    float rating, vlen;
+    int words;
+
+    title = "C++";
+    vlen = 5.4;
+    rating = 4.5;
+    CWHVideo cVideo(title, rating, vlen);
+    // cVideo.display();
+
+    // For code with harry text
+    title = "C++ text";
+    words = 433;
+    rating = 5.2;
+    CWHText cText(title, rating, words);
+    // cText.display();
+
+    CWH *tuts[2];
+    tuts[0] = &cVideo;
+    tuts[1] = &cText;
+
+    tuts[0]->display();
+    tuts[1]->display();
+    
+    return 0;
+}
